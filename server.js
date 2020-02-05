@@ -1,26 +1,20 @@
 import express from 'express';
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
 
+const __dirname = dirname(fileURLToPath(import.meta.url));
 const app = express();
 
-app.use( (req, res, next ) => {
-    console.log('<h1>HELLO!!!</h1>');
-    next();
-});
+app.use(express.urlencoded({extended: false}));
+app.use(express.json());
 
+app.use(express.static(__dirname + '/public'));
 app.get('/', (req, res) => {
-    res.send("Hello!!");
-});
-
-app.get('/profile', (req, res) => {
-    res.send("getting profile");
-});
-
-app.post('/', (req, res) => {
-    const user = {
-        name: 'John',
-        hobby: 'snowboarding'
-    }
-    res.send(user);
+    // req.query;  // get query
+    // req.body;
+    // req.headers;
+    // req.params;
+    res.send('Success!');
 });
 
 
